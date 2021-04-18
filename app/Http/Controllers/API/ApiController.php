@@ -23,7 +23,7 @@ class ApiController extends Controller
             $check = Member::where('auth_token',$headers['token'])->first();
             if(!isset($check->id))
             {
-                echo json_encode(response()->json(['status'=>'fail','data'=>array(),'message'=>'token mis matched']));
+                echo json_encode(['status'=>'fail','data'=>array(),'message'=>'token mis matched']);
                 die;
             }else{
                 $this->userId = $check->id;
