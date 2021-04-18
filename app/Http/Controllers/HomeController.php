@@ -73,10 +73,18 @@ class HomeController extends Controller
         $departments = $request->input('department');
         foreach($departments as $department)
         {
-            $doctors = $request->input('doctor'.$department);
-            $facilitys = $request->input('facility'.$department);
+            $doctors = $request->input('doctor'.$department,null);
+            $facilitys = $request->input('facility'.$department,null);
             $Relation = new Relationship();
             $Relation->department_id = $department;
+            if($doctors == null)
+            {
+                $doctors = array();
+            }
+            if($facilitys == null)
+            {
+                $facilitys = array();
+            }
             $Relation->doctors_id = json_encode($doctors);
             $Relation->facilitties_id = json_encode($facilitys);
             $Relation->hospital_id = $Hospital->id;
@@ -96,11 +104,13 @@ class HomeController extends Controller
     {
         $data = Hospital::where('id',$id)->first();
         $relationship_data = Relationship::where('hospital_id',$id)->get();
+
+        $all_selected_department = Relationship::where('hospital_id',$id)->pluck('department_id')->toArray();
         $allDepartment = Department::orderBy('id','desc')->get();
         $allDoctor = Doctor::orderBy('id','desc')->get();
         $allFacility = Facility::orderBy('id','desc')->get();
         $allTahs = Tag::orderBy('id','desc')->get();
-        return view('edithospital')->with('data',$data)->with('allDepartment',$allDepartment)->with('allDoctor',$allDoctor)->with('allFacility',$allFacility)->with('relationship_data',$relationship_data)->with('allTahs',$allTahs);
+        return view('edithospital')->with('data',$data)->with('allDepartment',$allDepartment)->with('allDoctor',$allDoctor)->with('allFacility',$allFacility)->with('relationship_data',$relationship_data)->with('allTahs',$allTahs)->with('all_selected_department',$all_selected_department);
     }
 
     public function updatehospital(Request $request)
@@ -124,10 +134,18 @@ class HomeController extends Controller
         $departments = $request->input('department');
         foreach($departments as $department)
         {
-            $doctors = $request->input('doctor'.$department);
-            $facilitys = $request->input('facility'.$department);
+            $doctors = $request->input('doctor'.$department,null);
+            $facilitys = $request->input('facility'.$department,null);
             $Relation = new Relationship();
             $Relation->department_id = $department;
+            if($doctors == null)
+            {
+                $doctors = array();
+            }
+            if($facilitys == null)
+            {
+                $facilitys = array();
+            }
             $Relation->doctors_id = json_encode($doctors);
             $Relation->facilitties_id = json_encode($facilitys);
             $Relation->hospital_id = $request->input('id');

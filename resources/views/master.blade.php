@@ -326,6 +326,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 
     <script>
+
+
+        $(document).ready(function() {
+
+            let currentUrl = window.location.href;
+            let status = currentUrl.includes('addhospital');
+            let status2 = currentUrl.includes('editHospital');
+            if(status == true || status2 == true)
+            {
+                $('.checkbox1').change(function() {
+                    let newId = this.id
+                    newId = newId.replace('department_', '');
+                    if(this.checked == true)
+                    {
+                        $('#row_div').append('<div id="'+this.id+'_div" class="row col-sm-12"><div class="col-sm-6"><label for="vehicle1">Select Department</label><select class="form-control" name="doctor'+newId+'[]" multiple>'+$('#alldoctor_div').html()+'</select></div><div class="col-sm-6"><label for="vehicle1">Select Facility</label><select class="form-control" name="facility'+newId+'[]" multiple>'+$('#allfacility_div').html()+'</select></div></div>');
+                    }else{
+                        $('#'+this.id+'_div').remove();
+                    }
+                });
+            }
+        });
+
         function deleteHospital(id)
         {
             $("#deleteHospitalButton").attr("deleteid",id);

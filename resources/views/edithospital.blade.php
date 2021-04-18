@@ -63,43 +63,112 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12">
+                    <style>
+                        .dropdown-check-list {
+                            display: inline-block;
+                        }
 
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="vehicle1">Select Department</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="vehicle1">Select Doctor</label>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="vehicle1">Select Facility</label>
-                            </div>
-                        </div>
+                        .dropdown-check-list .anchor {
+                            position: relative;
+                            cursor: pointer;
+                            display: inline-block;
+                            padding: 5px 50px 5px 10px;
+                            border: 1px solid #ccc;
+                        }
 
-                        <div class="row">
+                        .dropdown-check-list .anchor:after {
+                            position: absolute;
+                            content: "";
+                            border-left: 2px solid black;
+                            border-top: 2px solid black;
+                            padding: 5px;
+                            right: 10px;
+                            top: 20%;
+                            -moz-transform: rotate(-135deg);
+                            -ms-transform: rotate(-135deg);
+                            -o-transform: rotate(-135deg);
+                            -webkit-transform: rotate(-135deg);
+                            transform: rotate(-135deg);
+                        }
+
+                        .dropdown-check-list .anchor:active:after {
+                            right: 8px;
+                            top: 21%;
+                        }
+
+                        .dropdown-check-list ul.items {
+                            padding: 2px;
+                            display: none;
+                            margin: 0;
+                            border: 1px solid #ccc;
+                            border-top: none;
+                        }
+
+                        .dropdown-check-list ul.items li {
+                            list-style: none;
+                        }
+
+                        .dropdown-check-list.visible .anchor {
+                            color: #0094ff;
+                        }
+
+                        .dropdown-check-list.visible .items {
+                            display: block;
+                        }
+                    </style>
+
+                    <div id="list1" class="dropdown-check-list col-sm-6 visible" tabindex="100">
+                        <span class="anchor" style="width: 100%;">Select Department</span>
+                        <ul class="items">
                             @foreach ($allDepartment as $value)
-                            <div class="col-sm-4">
-                                <input type="checkbox" id="department_{{ $value->id }}" name="department[]" value="{{ $value->id }}">
-                                <label for="vehicle1"> {{ $value->title }}</label><br>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="doctor{{$value->id}}[]" multiple>
-                                @foreach ($allDoctor as $value1)
-                                <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <select class="form-control" name="facility{{$value->id}}[]" multiple>
-                                @foreach ($allFacility as $value2)
-                                <option value="{{ $value2->id }}">{{ $value2->title }}</option>
-                                @endforeach
-                                </select>
-                            </div>
-                            <br>
+                            <li><input <?php if(in_array($value->id,$all_selected_department)) echo 'checked'; ?> type="checkbox" class="checkbox1" id="department_{{ $value->id }}" name="department[]" value="{{ $value->id }}">{{ $value->title }} </li>
                             @endforeach
+                        </ul>
+                    </div><br>
+
+                    <script>
+                        var checkList = document.getElementById('list1');
+                        checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+                        if (checkList.classList.contains('visible'))
+                            checkList.classList.remove('visible');
+                        else
+                            checkList.classList.add('visible');
+                        }
+                    </script>
+
+
+                    <div id="row_div" style="width: 100%;padding-top:14px;">
+                        @foreach ($relationship_data as $rel)
+                        <div id="department_{{ $rel->department_id }}_div" class="row col-sm-12">
+                            <div class="col-sm-6">
+                                <label for="vehicle1">Select Department</label>
+                                <select class="form-control" name="doctor{{$rel->department_id}}[]" multiple>
+                                @foreach ($allDoctor as $value1)
+                                <option <?php if(in_array($value1->id, json_decode($rel->doctors_id))) echo 'selected'; ?> value="{{ $value1->id }}">{{ $value1->first_name }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="vehicle1">Select Facility</label>
+                                <select class="form-control" name="facility{{$rel->department_id}}[]" multiple>
+                                @foreach ($allFacility as $value2)
+                                <option <?php if(in_array($value2->id, json_decode($rel->facilitties_id))) echo 'selected'; ?> value="{{ $value2->id }}">{{ $value2->title }}</option>
+                                @endforeach
+                                </select>
+                            </div>
                         </div>
+                        @endforeach
+                    </div>
+
+                    <div id="alldoctor_div">
+                        @foreach ($allDoctor as $value1)
+                        <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
+                        @endforeach
+                    </div>
+                    <div id="allfacility_div">
+                        @foreach ($allFacility as $value2)
+                        <option value="{{ $value2->id }}">{{ $value2->title }}</option>
+                        @endforeach
                     </div>
 
 

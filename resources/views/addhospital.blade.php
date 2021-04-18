@@ -116,14 +116,14 @@
                         }
                     </style>
 
-                    <div id="list1" class="dropdown-check-list" tabindex="100">
-                        <span class="anchor">Select Department</span>
+                    <div id="list1" class="dropdown-check-list col-sm-6 visible" tabindex="100">
+                        <span class="anchor" style="width: 100%;">Select Department</span>
                         <ul class="items">
                             @foreach ($allDepartment as $value)
-                            <li><input onchange="" value="{{ $value->id }}" type="checkbox" />{{ $value->title }} </li>
+                            <li><input type="checkbox" class="checkbox1" id="department_{{ $value->id }}" name="department[]" value="{{ $value->id }}">{{ $value->title }} </li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div><br>
 
                     <script>
                         var checkList = document.getElementById('list1');
@@ -136,11 +136,56 @@
                     </script>
 
 
-
-                    <div id="row_div" class="row">
-
+                    <div id="row_div" style="width: 100%;padding-top:14px;">
+                        {{-- <div id="department_4_div" class="row col-sm-12">
+                            <div class="col-sm-6">
+                                <label for="vehicle1">Select Department</label>
+                                <select class="form-control" name="doctor{{$value->id}}[]" multiple>
+                                @foreach ($allDoctor as $value1)
+                                <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="vehicle1">Select Facility</label>
+                                <select class="form-control" name="facility{{$value->id}}[]" multiple>
+                                @foreach ($allFacility as $value2)
+                                <option value="{{ $value2->id }}">{{ $value2->title }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
                     </div>
 
+                    <div id="alldoctor_div">
+                        @foreach ($allDoctor as $value1)
+                        <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
+                        @endforeach
+                    </div>
+                    <div id="allfacility_div">
+                        @foreach ($allFacility as $value2)
+                        <option value="{{ $value2->id }}">{{ $value2->title }}</option>
+                        @endforeach
+                    </div>
+
+                    {{-- <div id="dev_content" style="display: none">
+                        <div class="col-sm-6">
+                            <label for="vehicle1">Select Department</label>
+                            <select class="form-control" name="doctor{{$value->id}}[]" multiple>
+                                @foreach ($allDoctor as $value1)
+                                <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="vehicle1">Select Facility</label>
+                            <select class="form-control" name="facility{{$value->id}}[]" multiple>
+                                @foreach ($allFacility as $value2)
+                                <option value="{{ $value2->id }}">{{ $value2->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> --}}
                     {{-- <div class="col-sm-6">
                         <div class="form-group">
                             <label>Select Department</label>
@@ -153,7 +198,7 @@
                     </div> --}}
 
 
-                    <div class="col-sm-12">
+                    {{-- <div class="col-sm-12">
 
                         <div class="row">
                             <div class="col-sm-4">
@@ -190,7 +235,7 @@
                             <br>
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="col-sm-6">
