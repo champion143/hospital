@@ -25,6 +25,15 @@
                             <input class="form-control" value="{{ $data->last_name }}" name="last_name" type="text">
                         </div>
                     </div>
+                    
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Specialization <span class="text-danger">*</span></label>
+                            <input class="form-control" value="{{ $data->specialization }}" name="specialization" type="text">
+                        </div>
+                    </div>
+                    
+                    
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-12">
@@ -32,30 +41,6 @@
                                     <label>Description</label>
                                     <textarea type="textarea" name="description" class="form-control ">{{ $data->description }}</textarea>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <div class="cal-icon">
-                                <input type="date" name="dob" value="{{ $data->dob }}" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group gender-select">
-                            <label class="gen-label">Gender:</label>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" name="gender" class="form-check-input">Male
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" name="gender" class="form-check-input">Female
-                                </label>
                             </div>
                         </div>
                     </div>

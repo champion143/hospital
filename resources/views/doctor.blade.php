@@ -20,8 +20,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Description</th>
-                            <th>Date Of Birth</th>
-                            <th>Gender</th>
+                            <th>Specialization</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>
@@ -31,9 +30,8 @@
                                 <td>{{ ($key+1) }}</td>
                                 <td><img width="28" height="28" src="{{ url('images').'/'.$value->image }}" class="rounded-circle m-r-5" alt=""> {{ $value->first_name }}</td>
                                 <td>{{ $value->last_name }}</td>
-                                <td>{{ $value->description }}</td>
-                                <td>{{ $value->dob  }}</td>
-                                <td>{{ $value->gender  }}</td>
+                                <td><?php echo $value->description; ?></td>
+                                <td>{{ $value->specialization  }}</td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

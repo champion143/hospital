@@ -24,7 +24,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea type="textarea" name="description" class="form-control ">{{ $data->description }}</textarea>
+                                    <textarea type="textarea" name="description1" class="form-control ">{{ $data->description }}</textarea>
                                 </div>
                             </div>
                         </div>

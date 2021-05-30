@@ -24,6 +24,15 @@
                             <input class="form-control" name="last_name" type="text">
                         </div>
                     </div>
+                    
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Specialization <span class="text-danger">*</span></label>
+                            <input class="form-control" name="specialization" type="text">
+                        </div>
+                    </div>
+                    
+                    
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-12">
@@ -35,29 +44,6 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <div class="cal-icon">
-                                <input type="date" name="dob" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group gender-select">
-                            <label class="gen-label">Gender:</label>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" name="gender" class="form-check-input">Male
-                                </label>
-                            </div>
-                            <div class="form-check-inline">
-                                <label class="form-check-label">
-                                    <input type="radio" name="gender" class="form-check-input">Female
-                                </label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Avatar</label>

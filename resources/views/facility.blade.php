@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{ ($key+1) }}</td>
                                 <td><img width="28" height="28" src="{{ url('images').'/'.$value->image }}" class="rounded-circle m-r-5" alt=""> {{ $value->title }}</td>
-                                <td>{{ $value->description }}</td>
+                                <td><?php echo $value->description; ?></td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>

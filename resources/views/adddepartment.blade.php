@@ -23,7 +23,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea type="textarea" name="description" class="form-control "></textarea>
+                                    <textarea maxlength="200" type="textarea" name="description1" class="form-control "></textarea>
                                 </div>
                             </div>
                         </div>

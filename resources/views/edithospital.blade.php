@@ -1,6 +1,14 @@
 @extends('master')
 
 @section('content')
+<style>
+    .btn-group{
+        width:100%!important;
+    }
+</style>
+<?php
+    $tags = json_decode($data->tag);
+?>
 <div class="content">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
@@ -55,9 +63,9 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Tag </label>
-                            <select name="tag" class="form-control">
+                            <select name="tag" data-role="multiselect" class="form-control" multiple required="required">
                                 @foreach ($allTahs as $tag)
-                                <option <?php if($tag->id == $data->tag) echo "selected"; ?> value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                <option <?php if(in_array($tag->id,$tags)) echo "selected"; ?> value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -142,7 +150,7 @@
                         <div id="department_{{ $rel->department_id }}_div" class="row col-sm-12">
                             <div class="col-sm-6">
                                 <label for="vehicle1">Select Department</label>
-                                <select class="form-control" name="doctor{{$rel->department_id}}[]" multiple>
+                                <select class="form-control" data-role="multiselect" name="doctor{{$rel->department_id}}[]" multiple>
                                 @foreach ($allDoctor as $value1)
                                 <option <?php if(in_array($value1->id, json_decode($rel->doctors_id))) echo 'selected'; ?> value="{{ $value1->id }}">{{ $value1->first_name }}</option>
                                 @endforeach
@@ -150,7 +158,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="vehicle1">Select Facility</label>
-                                <select class="form-control" name="facility{{$rel->department_id}}[]" multiple>
+                                <select data-role="multiselect" class="form-control" name="facility{{$rel->department_id}}[]" multiple>
                                 @foreach ($allFacility as $value2)
                                 <option <?php if(in_array($value2->id, json_decode($rel->facilitties_id))) echo 'selected'; ?> value="{{ $value2->id }}">{{ $value2->title }}</option>
                                 @endforeach

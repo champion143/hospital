@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Doctor;
 use App\Models\Facility;
 use App\Models\Hospital;
+use App\Models\User;
 use App\Models\Relationship;
 use App\Models\Tag;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -35,7 +36,11 @@ class HomeController extends Controller
         $DepartmentCount = Department::count();
         $FacilityCount = Facility::count();
         $HospitalCount = Hospital::count();
-        return view('home')->with('DoctorCount',$DoctorCount)->with('DepartmentCount',$DepartmentCount)->with('FacilityCount',$FacilityCount)->with('HospitalCount',$HospitalCount);
+        
+        $doctorList = Doctor::orderBy('id','desc')->get();
+        $userList = User::orderBy('id','desc')->get();
+        
+        return view('home')->with('DoctorCount',$DoctorCount)->with('DepartmentCount',$DepartmentCount)->with('FacilityCount',$FacilityCount)->with('HospitalCount',$HospitalCount)->with('doctorList',$doctorList)->with('userList',$userList);
     }
 
     public function hospital()
@@ -61,7 +66,7 @@ class HomeController extends Controller
         $Hospital->location = $request->input('location');
         $Hospital->description = $request->input('description');
         $Hospital->phone = $request->input('phone');
-        $Hospital->tag = $request->input('tag');
+        $Hospital->tag = json_encode($request->input('tag'));
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();
@@ -70,25 +75,27 @@ class HomeController extends Controller
             $Hospital->image = $name;
         }
         $Hospital->save();
-        $departments = $request->input('department');
-        foreach($departments as $department)
-        {
-            $doctors = $request->input('doctor'.$department,null);
-            $facilitys = $request->input('facility'.$department,null);
-            $Relation = new Relationship();
-            $Relation->department_id = $department;
-            if($doctors == null)
+        if($request->has('department')) {
+            $departments = $request->input('department');
+            foreach($departments as $department)
             {
-                $doctors = array();
+                $doctors = $request->input('doctor'.$department,null);
+                $facilitys = $request->input('facility'.$department,null);
+                $Relation = new Relationship();
+                $Relation->department_id = $department;
+                if($doctors == null)
+                {
+                    $doctors = array();
+                }
+                if($facilitys == null)
+                {
+                    $facilitys = array();
+                }
+                $Relation->doctors_id = json_encode($doctors);
+                $Relation->facilitties_id = json_encode($facilitys);
+                $Relation->hospital_id = $Hospital->id;
+                $Relation->save();
             }
-            if($facilitys == null)
-            {
-                $facilitys = array();
-            }
-            $Relation->doctors_id = json_encode($doctors);
-            $Relation->facilitties_id = json_encode($facilitys);
-            $Relation->hospital_id = $Hospital->id;
-            $Relation->save();
         }
         return redirect()->route('hospital');
     }
@@ -121,7 +128,7 @@ class HomeController extends Controller
         $userDetail['location'] = $request->input('location');
         $userDetail['description'] = $request->input('description');
         $userDetail['phone'] = $request->input('phone');
-        $userDetail['tag'] = $request->input('tag');
+        $userDetail['tag'] = json_encode($request->input('tag'));
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();
@@ -131,25 +138,27 @@ class HomeController extends Controller
         }
         Hospital::where('id',$request->input('id'))->update($userDetail);
         Relationship::where('hospital_id',$request->input('id'))->delete();
-        $departments = $request->input('department');
-        foreach($departments as $department)
-        {
-            $doctors = $request->input('doctor'.$department,null);
-            $facilitys = $request->input('facility'.$department,null);
-            $Relation = new Relationship();
-            $Relation->department_id = $department;
-            if($doctors == null)
+        if($request->has('department')) {
+            $departments = $request->input('department');
+            foreach($departments as $department)
             {
-                $doctors = array();
+                $doctors = $request->input('doctor'.$department,null);
+                $facilitys = $request->input('facility'.$department,null);
+                $Relation = new Relationship();
+                $Relation->department_id = $department;
+                if($doctors == null)
+                {
+                    $doctors = array();
+                }
+                if($facilitys == null)
+                {
+                    $facilitys = array();
+                }
+                $Relation->doctors_id = json_encode($doctors);
+                $Relation->facilitties_id = json_encode($facilitys);
+                $Relation->hospital_id = $request->input('id');
+                $Relation->save();
             }
-            if($facilitys == null)
-            {
-                $facilitys = array();
-            }
-            $Relation->doctors_id = json_encode($doctors);
-            $Relation->facilitties_id = json_encode($facilitys);
-            $Relation->hospital_id = $request->input('id');
-            $Relation->save();
         }
         return redirect()->route('hospital');
     }
@@ -170,7 +179,7 @@ class HomeController extends Controller
     public function addactiondepartment(Request $request)
     {
         $department = new Department();
-        $department->description = $request->input('description');
+        $department->description = $request->input('description1');
         $department->title = $request->input('title');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -200,7 +209,7 @@ class HomeController extends Controller
     public function updatedepartment(Request $request)
     {
         $userDetail = array();
-        $userDetail['description'] = $request->input('description');
+        $userDetail['description'] = $request->input('description1');
         $userDetail['title'] = $request->input('title');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -295,8 +304,7 @@ class HomeController extends Controller
         $doctor->description = $request->input('description');
         $doctor->first_name = $request->input('first_name');
         $doctor->last_name = $request->input('last_name');
-        $doctor->dob = $request->input('dob');
-        $doctor->gender = $request->input('gender');
+        $doctor->specialization = $request->input('specialization');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();
@@ -328,8 +336,7 @@ class HomeController extends Controller
         $userDetail['description'] = $request->input('description');
         $userDetail['first_name'] = $request->input('first_name');
         $userDetail['last_name'] = $request->input('last_name');
-        $userDetail['dob'] = $request->input('dob');
-        $userDetail['gender'] = $request->input('gender');
+        $userDetail['specialization'] = $request->input('specialization');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();

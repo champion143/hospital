@@ -1,6 +1,11 @@
 @extends('master')
 
 @section('content')
+<style>
+    .btn-group{
+        width:100%!important;
+    }
+</style>
 <div class="content">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
@@ -15,13 +20,13 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Name <span class="text-danger">*</span></label>
-                            <input class="form-control" name="name" type="text">
+                            <input class="form-control" name="name" type="text" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Title <span class="text-danger">*</span></label>
-                            <input class="form-control" name="title" type="text">
+                            <input class="form-control" name="title" type="text" required>
                         </div>
                     </div>
                     <div class="col-sm-12">
@@ -29,7 +34,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" name="location" class="form-control ">
+                                    <input type="text" name="location" class="form-control " required>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +44,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea type="textarea" name="description" class="form-control "></textarea>
+                                    <textarea type="textarea" name="description" class="form-control " required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -47,14 +52,14 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Phone </label>
-                            <input class="form-control" name="phone" type="text">
+                            <input class="form-control" name="phone" type="text" required>
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Tag </label>
-                            <select name="tag" class="form-control">
+                            <select name="tag[]" data-role="multiselect" class="form-control" multiple required="required">
                                 @foreach ($allTahs as $tag)
                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
@@ -171,7 +176,7 @@
                     {{-- <div id="dev_content" style="display: none">
                         <div class="col-sm-6">
                             <label for="vehicle1">Select Department</label>
-                            <select class="form-control" name="doctor{{$value->id}}[]" multiple>
+                            <select class="form-control" name="doctor{{$value->id}}[]" class="select_depar" multiple>
                                 @foreach ($allDoctor as $value1)
                                 <option value="{{ $value1->id }}">{{ $value1->first_name }}</option>
                                 @endforeach

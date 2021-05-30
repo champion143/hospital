@@ -17,6 +17,18 @@
 		<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/css/bootstrap-multiselect.css" />
+    
+    <style>
+        #alldoctor_div{
+            display:none;
+        }
+        #allfacility_div{
+            display:none;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -30,85 +42,85 @@
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span>Notifications</span>
-                        </div>
-                        <div class="drop-scroll">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">
-												<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">G</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="activities.html">
-                                        <div class="media">
-											<span class="avatar">V</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-												<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="activities.html">View all Notifications</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li>
+           <!--     <li class="nav-item dropdown d-none d-sm-block">-->
+           <!--         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>-->
+           <!--         <div class="dropdown-menu notifications">-->
+           <!--             <div class="topnav-dropdown-header">-->
+           <!--                 <span>Notifications</span>-->
+           <!--             </div>-->
+           <!--             <div class="drop-scroll">-->
+           <!--                 <ul class="notification-list">-->
+           <!--                     <li class="notification-message">-->
+           <!--                         <a href="activities.html">-->
+           <!--                             <div class="media">-->
+											<!--<span class="avatar">-->
+											<!--	<img alt="John Doe" src="assets/img/user.jpg" class="img-fluid">-->
+											<!--</span>-->
+											<!--<div class="media-body">-->
+											<!--	<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>-->
+											<!--	<p class="noti-time"><span class="notification-time">4 mins ago</span></p>-->
+											<!--</div>-->
+           <!--                             </div>-->
+           <!--                         </a>-->
+           <!--                     </li>-->
+           <!--                     <li class="notification-message">-->
+           <!--                         <a href="activities.html">-->
+           <!--                             <div class="media">-->
+											<!--<span class="avatar">V</span>-->
+											<!--<div class="media-body">-->
+											<!--	<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>-->
+											<!--	<p class="noti-time"><span class="notification-time">6 mins ago</span></p>-->
+											<!--</div>-->
+           <!--                             </div>-->
+           <!--                         </a>-->
+           <!--                     </li>-->
+           <!--                     <li class="notification-message">-->
+           <!--                         <a href="activities.html">-->
+           <!--                             <div class="media">-->
+											<!--<span class="avatar">L</span>-->
+											<!--<div class="media-body">-->
+											<!--	<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>-->
+											<!--	<p class="noti-time"><span class="notification-time">8 mins ago</span></p>-->
+											<!--</div>-->
+           <!--                             </div>-->
+           <!--                         </a>-->
+           <!--                     </li>-->
+           <!--                     <li class="notification-message">-->
+           <!--                         <a href="activities.html">-->
+           <!--                             <div class="media">-->
+											<!--<span class="avatar">G</span>-->
+											<!--<div class="media-body">-->
+											<!--	<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>-->
+											<!--	<p class="noti-time"><span class="notification-time">12 mins ago</span></p>-->
+											<!--</div>-->
+           <!--                             </div>-->
+           <!--                         </a>-->
+           <!--                     </li>-->
+           <!--                     <li class="notification-message">-->
+           <!--                         <a href="activities.html">-->
+           <!--                             <div class="media">-->
+											<!--<span class="avatar">V</span>-->
+											<!--<div class="media-body">-->
+											<!--	<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>-->
+											<!--	<p class="noti-time"><span class="notification-time">2 days ago</span></p>-->
+											<!--</div>-->
+           <!--                             </div>-->
+           <!--                         </a>-->
+           <!--                     </li>-->
+           <!--                 </ul>-->
+           <!--             </div>-->
+           <!--             <div class="topnav-dropdown-footer">-->
+           <!--                 <a href="activities.html">View all Notifications</a>-->
+           <!--             </div>-->
+           <!--         </div>-->
+           <!--     </li>-->
+           <!--     <li class="nav-item dropdown d-none d-sm-block">-->
+           <!--         <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>-->
+           <!--     </li>-->
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-							<img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+							<img class="rounded-circle" src="{{ url('assets/img/user.jpg') }}" width="24" alt="Admin">
 							<span class="status online"></span>
 						</span>
 						<span>Admin</span>
@@ -116,7 +128,6 @@
 					<div class="dropdown-menu">
 						{{-- <a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a> --}}
-						<a class="dropdown-item" href="#">Settings</a>
 						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
@@ -127,9 +138,6 @@
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
                     <a class="dropdown-item" href="login.html">Logout</a>
                 </div>
             </div>
@@ -324,12 +332,12 @@
     <script src="{{ url('assets/js/chart.js') }}"></script>
     <script src="{{ url('assets/js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.16/js/bootstrap-multiselect.js"></script>
 
     <script>
 
 
         $(document).ready(function() {
-
             let currentUrl = window.location.href;
             let status = currentUrl.includes('addhospital');
             let status2 = currentUrl.includes('editHospital');
@@ -340,7 +348,10 @@
                     newId = newId.replace('department_', '');
                     if(this.checked == true)
                     {
-                        $('#row_div').append('<div id="'+this.id+'_div" class="row col-sm-12"><div class="col-sm-6"><label for="vehicle1">Select Department</label><select class="form-control" name="doctor'+newId+'[]" multiple>'+$('#alldoctor_div').html()+'</select></div><div class="col-sm-6"><label for="vehicle1">Select Facility</label><select class="form-control" name="facility'+newId+'[]" multiple>'+$('#allfacility_div').html()+'</select></div></div>');
+                        $('#row_div').append('<div id="'+this.id+'_div" class="row col-sm-12"><div class="col-sm-6"><label for="vehicle1">Select Department</label><select data-role="multiselect" id="multiselect_'+this.id+'" class="form-control" name="doctor'+newId+'[]" multiple required="required">'+$('#alldoctor_div').html()+'</select></div><div class="col-sm-6"><label for="vehicle1">Select Facility</label><select id="multiselectf_'+this.id+'" class="form-control" name="facility'+newId+'[]" multiple>'+$('#allfacility_div').html()+'</select></div></div>');
+                        
+                        $('#multiselect_'+this.id).multiselect('refresh');
+                        $('#multiselectf_'+this.id).multiselect('refresh');
                     }else{
                         $('#'+this.id+'_div').remove();
                     }
@@ -455,9 +466,14 @@
 
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace('description');
     </script>
-
+    
+    <script>
+        $(document).ready(function() {
+            $('.select_depar').multiSelect({});
+        });
+    </script>
 </body>
 
 

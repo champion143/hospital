@@ -90,12 +90,13 @@ class ApiController extends Controller
         $skip = ($page_no-1)*$page_count;
         if($searchTerm == "")
         {
-            $allHospital = Hospital::query()->skip($skip)->take($page_count)->get();
+            // $allHospital = Hospital::query()->skip($skip)->take($page_count)->get();
+            $allHospital = Hospital::query()->get();
         } else {
             $allHospital = Hospital::query()
                 ->where('name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('tag', 'LIKE', "%{$searchTerm}%")
-                ->skip($skip)->take($page_count)
+                // ->skip($skip)->take($page_count)
                 ->get();
         }
 
@@ -109,16 +110,24 @@ class ApiController extends Controller
                 {
                     $department = $allDepartment->toArray()['get_department'];
                     $department['image'] = url('images').'/'.$department['image'];
+                    
+                    $short_description = str_replace("&nbsp;"," ",strip_tags($department['description']));
+                    $department['short_description'] = strlen($short_description) > 60 ? substr($short_description,0,60)."..." : $short_description;;
+                    
                     $allDoctors = Doctor::whereIn('id',json_decode($allDepartment['doctors_id']))->get();
                     foreach($allDoctors as $doctor)
                     {
                         $doctor->image = url('images').'/'.$doctor->image;
+                        $doctor->short_description = str_replace("&nbsp;"," ",strip_tags($doctor->description));
                     }
                     $department['all_doctor'] = $allDoctors;
                     $allFaciltities = Facility::whereIn('id',json_decode($allDepartment['facilitties_id']))->get();
                     foreach($allFaciltities as $facility)
                     {
                         $facility->image = url('images').'/'.$facility->image;
+                        $short_description = str_replace("&nbsp;"," ",strip_tags($facility->description));
+                        
+                        $facility->short_description = strlen($short_description) > 50 ? substr($short_description,0,50)."..." : $short_description;
                     }
                     $department['all_allFacilty'] = $allFaciltities;
                     array_push($allDepartmentsArray,$department);
